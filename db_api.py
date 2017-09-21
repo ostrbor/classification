@@ -1,10 +1,12 @@
 from collections import namedtuple
-from .models import Products1, Products2
+from models import Products1, Products2
+
+Categories = namedtuple('Categories', ['base', 'derivative'])
 
 
 class DatabaseApi:
     def __init__(self):
-        self.categories = namedtuple('Categories', ['base', 'derivative'])
+        self.categories = Categories
 
     def get_distinct_categories_combination(self):
         qry = (Products1.select(Products1.category,

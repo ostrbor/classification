@@ -1,6 +1,7 @@
 from peewee import SqliteDatabase, Model, TextField, IntegerField
 
 database = SqliteDatabase('test.db', **{})
+result_database = SqliteDatabase('result.db', **{})
 
 
 class Categories(Model):
@@ -36,3 +37,18 @@ class Products2(Model):
         database = database
         db_table = 'products_2'
         primary_key = False
+
+
+class Prediction(Model):
+    category = TextField(unique=True)
+    eshop_category = TextField()
+    set_probability = IntegerField(null=True)
+    ngram_probability = IntegerField(null=True)
+
+    class Meta:
+        database = result_database
+
+
+def create_tables():
+    database.connect()
+    database.create_tables([Prediction])
