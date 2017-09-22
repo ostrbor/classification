@@ -12,18 +12,18 @@ class GroupRelations:
     """
 
     def __init__(self, data):
-        self.data = self.convert(data)
+        self.data = self._convert(data)
 
     def __iter__(self):
         self.counter = 0
         return self
 
-    def __next__(self):
+    def __next__(self) -> GroupRelation:
         if self.counter == len(self.data):
             raise StopIteration
-        res = self.data[self.counter]
+        next_value = self.data[self.counter]
         self.counter += 1
-        return res
+        return next_value
 
     def __sub__(self, other):
         """
@@ -35,7 +35,7 @@ class GroupRelations:
                 res.append(group_relation)
         return GroupRelations(res)
 
-    def convert(self, data) -> List[namedtuple]:
+    def _convert(self, data) -> List[namedtuple]:
         # data input: List[Tuples] or GroupRelations
         return [GroupRelation(*x) for x in data]
 
