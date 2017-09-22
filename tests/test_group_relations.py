@@ -17,3 +17,11 @@ class GroupsTest(TestCase):
         expected = GroupRelations([('b', 'B')])
         res = group_rels_major - group_rels_minor
         self.assertEqual(expected.data, res.data)
+
+    def test_iteration(self):
+        data = GroupRelations(self.data)
+        res = []
+        for i in data:
+            res.append(i[0])
+        expected = ['a', 'b']
+        self.assertEqual(expected, res)

@@ -14,16 +14,16 @@ class GroupRelations:
     def __init__(self, data):
         self.data = self.convert(data)
 
-    def convert(self, data) -> List[namedtuple]:
-        # data: List[Tuples] or GroupRelations
-        return [GroupRelation(*x) for x in data]
+    def __iter__(self):
+        self.counter = 0
+        return self
 
-    def save_results(self):
-        for group_relation in self.data:
-            record = Prediction(category=group_relation.base_group,
-                                eshop_category=group_relation.derivative_group,
-                                set_probability=100)
-            record.save()
+    def __next__(self):
+        if self.counter == len(self.data):
+            raise StopIteration
+        res = self.data[self.counter]
+        self.counter += 1
+        return res
 
     def __sub__(self, other):
         """
@@ -34,3 +34,14 @@ class GroupRelations:
             if group_relation not in other.data:
                 res.append(group_relation)
         return GroupRelations(res)
+
+    def convert(self, data) -> List[namedtuple]:
+        # data input: List[Tuples] or GroupRelations
+        return [GroupRelation(*x) for x in data]
+
+    def save_results(self):
+        for group_relation in self.data:
+            record = Prediction(category=group_relation.base_group,
+                                eshop_category=group_relation.derivative_group,
+                                set_probability=100)
+            record.save()
