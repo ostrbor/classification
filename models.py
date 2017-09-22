@@ -47,8 +47,3 @@ class Prediction(Model):
 
     class Meta:
         database = result_database
-
-
-def create_tables():
-    database.connect()
-    database.create_tables([Prediction])
