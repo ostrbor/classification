@@ -1,15 +1,12 @@
-from collections import namedtuple
 from models import Products1, Products2
-
-GroupRelation = namedtuple('Categories', ['base', 'derivative'])
+from group_relations import GroupRelations, GroupRelation
 
 
 class DatabaseApi:
-    def __init__(self):
-        self.categories = GroupRelation
-
-    def get_distinct_categories_combination(self):
+    @classmethod
+    def get_distinct_groups_combination(cls) -> GroupRelations:
         qry = (Products1.select(Products1.category,
                                 Products2.eshop_category).distinct()
                .join(Products2, on=(Products1.plu == Products2.plu)).tuples())
-        return [self.categories(record[0], record[1]) for record in qry]
+        res = [GroupRelation(record[0], record[1]) for record in qry]
+        return GroupRelations(res)

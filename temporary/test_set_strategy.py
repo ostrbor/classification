@@ -1,6 +1,6 @@
 import unittest
 from strategies import SetStrategy
-from db_api import Categories
+from db_api import GroupRelation
 
 # derivative category is letter uppercase
 # base category is letter lowercase
@@ -18,8 +18,8 @@ class SetStrategyTest(unittest.TestCase):
         self.assertEqual(expected, list(actual))
 
     def test_get_intersection(self):
-        expected = Categories(base='a', derivative=None)
-        data = [expected, Categories(base='b', derivative=None)]
+        expected = GroupRelation(base='a', derivative=None)
+        data = [expected, GroupRelation(base='b', derivative=None)]
         self.strategy.categories = data
         res = self.strategy.get_intersection(['a'])
         self.assertEqual([expected], res)
@@ -31,9 +31,9 @@ class SetStrategyTest(unittest.TestCase):
             expected, self.strategy.count_base_subgroups(derivative_groups))
 
     def test_group_derivative_categories(self):
-        cat1 = Categories(base='a', derivative='A')
-        cat2 = Categories(base='b', derivative='A')
-        cat3 = Categories(base='a', derivative='B')
+        cat1 = GroupRelation(base='a', derivative='A')
+        cat2 = GroupRelation(base='b', derivative='A')
+        cat3 = GroupRelation(base='a', derivative='B')
         data = [cat1, cat2, cat3]
 
         self.strategy.categories = data

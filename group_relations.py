@@ -35,8 +35,12 @@ class GroupRelations:
                 res.append(group_relation)
         return GroupRelations(res)
 
+    def __len__(self):
+        return len(self.data)
+
     def _convert(self, data) -> List[namedtuple]:
         # data input: List[Tuples] or GroupRelations
+        # needs to be converted if List[Tuples]
         return [GroupRelation(*x) for x in data]
 
     def save_results(self):

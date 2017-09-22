@@ -8,10 +8,6 @@ class Bijection:
     To find one to one relationship between two fields in Groups: base and derivative.
     Result: table where it's possible to predict derivative value by base value.
     """
-    categories = None
-    reliable_categories = None
-    unreliable_to_save = None
-    unreliable_categories = None  # (base, derivative, probability)
 
     def __init__(self, group_relations: GroupRelations):
         self.group_relations = group_relations

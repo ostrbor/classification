@@ -1,6 +1,7 @@
 from typing import List, Dict, Tuple
-from .bijection_mixin import BijectionMixin
-from .probability_mixin import ProbabilityMixin
+
+from temporary.bijection_mixin import BijectionMixin
+from temporary.probability_mixin import ProbabilityMixin
 
 Groups = Dict[str, List[str]]
 
