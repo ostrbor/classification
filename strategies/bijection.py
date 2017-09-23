@@ -1,16 +1,14 @@
 from typing import List, Dict
 from collections import defaultdict
+from .base import Strategy
 from group_relations import GroupRelation, GroupRelations
 
 
-class Bijection:
+class Bijection(Strategy):
     """
     To find one to one relationship between two fields in Groups: base and derivative.
     Result: table where it's possible to predict derivative value by base value.
     """
-
-    def __init__(self, group_relations: GroupRelations):
-        self.group_relations = group_relations
 
     def process(self) -> GroupRelations:
         grouped_dervs = self.group_derivatives()
