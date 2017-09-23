@@ -3,7 +3,8 @@ from typing import List, Dict, Tuple, Union
 from models import Prediction
 
 GroupRelation = namedtuple('GroupRelation', ['base_group', 'derivative_group',
-                                             'base_group_name', 'derivative_group_name'])
+                                             'base_group_name', 'derivative_group_name',
+                                             'ngram_probability'])
 GroupRelation.__new__.__defaults__ = (None,) * len(GroupRelation._fields)
 
 
