@@ -46,9 +46,17 @@ class GroupRelations:
         # needs to be converted if List[Tuples]
         return [GroupRelation(*x) for x in data]
 
-    def save_results(self):
+    def save_bijection_results(self):
         for group_relation in self.data:
             record = Prediction(category=group_relation.base_group,
                                 eshop_category=group_relation.derivative_group,
                                 set_probability=100)
+            record.save()
+
+    def save_ngram_results(self):
+        for group_relation in self.data:
+            probability = int(group_relation.ngram_probability*100)
+            record = Prediction(category=group_relation.base_group,
+                                eshop_category=group_relation.derivative_group,
+                                ngram_probability=probability)
             record.save()

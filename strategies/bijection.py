@@ -9,12 +9,13 @@ class Bijection(Strategy):
     To find one to one relationship between two fields in Groups: base and derivative.
     Result: table where it's possible to predict derivative value by base value.
     """
-
     def process(self) -> GroupRelations:
         grouped_dervs = self.group_derivatives()
+        self.grouped_categories = grouped_dervs
         counted_bases = self.count_base_subgroups(grouped_dervs)
         unique_bases = self.get_unique_base_subgroups(counted_bases)
         bijective_groups = self.get_bijective_groups(unique_bases)
+        self.result_categories = bijective_groups
         return GroupRelations(bijective_groups)
 
     def group_derivatives(self) -> Dict[str, List[str]]:

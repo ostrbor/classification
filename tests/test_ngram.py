@@ -1,6 +1,6 @@
 from unittest import TestCase
 from strategies import Ngram
-from group_relations import GroupRelations
+from group_relations import GroupRelations, GroupRelation
 
 
 class NgramTest(TestCase):
@@ -16,3 +16,9 @@ class NgramTest(TestCase):
         input_data = {base_group: [untransformed_base_group, 'wrong | group']}
         expected = [{base_group: (untransformed_base_group, 1.0)}]
         self.assertEqual(expected, strategy.apply_ngram(input_data))
+
+    def test_group_relation_by_base_name(self):
+        gr = GroupRelation(base_group_name='name')
+        grs = GroupRelations([gr])
+        strategy = Ngram(grs)
+        self.assertEqual(gr, strategy.get_group_relation_by_base_name('name'))

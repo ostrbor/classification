@@ -8,7 +8,7 @@ class DatabaseApi:
         qry = (Products1.select(Products1.category,
                                 Products2.eshop_category,
                                 Categories.name,
-                                Products2.eshop_category)
+                                Products2.eshop_category_name)
                .distinct()
                .join(Products2, on=(Products1.plu == Products2.plu))
                .join(Categories, on=(Products1.category == Categories.category))
